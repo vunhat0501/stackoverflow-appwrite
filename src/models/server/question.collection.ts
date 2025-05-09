@@ -1,8 +1,9 @@
 import { Permission } from 'node-appwrite';
+
 import { db, questionCollection } from '@/models/name';
 import { databases } from '@/models/server/config';
 
-export default async function createQuestionCollection() {
+export default async function creatQuestionCollection() {
     //** create collection */
     await databases.createCollection(
         db,
