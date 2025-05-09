@@ -6,4 +6,6 @@ dist
 # Ignore configuration files:
 .vscode
 
+
+.next
 *.env
