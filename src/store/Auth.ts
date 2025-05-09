@@ -82,7 +82,7 @@ export const useAuthStore = create<AuthStore>()(
 
             async createAccount(name: string, email: string, password: string) {
                 try {
-                    account.create(ID.unique(), email, password, name);
+                    await account.create(ID.unique(), email, password, name);
                     return { success: true };
                 } catch (error) {
                     console.error('Error creating account:', error);
