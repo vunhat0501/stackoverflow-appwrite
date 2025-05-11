@@ -1,11 +1,8 @@
-# Ignore artifacts:
-build
-coverage
 node_modules
 dist
-# Ignore configuration files:
-.vscode
-
-
+.build
 .next
+coverage
 *.env
+.vscode
+.eslintrc

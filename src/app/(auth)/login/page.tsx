@@ -1,11 +1,11 @@
-"use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+'use client';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/Auth';
-import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
-import Link from "next/link";
-import React from 'react'
+import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
+import Link from 'next/link';
+import React from 'react';
 
 const BottomGradient = () => {
     return (
@@ -23,39 +23,45 @@ const LabelInputContainer = ({
     children: React.ReactNode;
     className?: string;
 }) => {
-    return <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>;
+    return (
+        <div className={cn('flex w-full flex-col space-y-2', className)}>
+            {children}
+        </div>
+    );
 };
 
-
 export default function LoginPage() {
-    const {login} = useAuthStore();
+    const { login } = useAuthStore();
     const [loading, setLoading] = React.useState(false);
-    const [error, setError] = React.useState("");
+    const [error, setError] = React.useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         // collect data
-        const formData = new FormData(e.currentTarget)
-        const email = formData.get("email")
-        const pasdword = formData.get("password")
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get('email');
+        const pasdword = formData.get('password');
 
         // vadidate data
         if (!email || !pasdword) {
-            setError(() => "All fields are required");
-            return
+            setError(() => 'All fields are required');
+            return;
         }
 
         setLoading(() => true);
-        setError(() => "");
+        setError(() => '');
 
         // login => store
-        const loginResponse = await login(email?.toString(), pasdword?.toString())
+        const loginResponse = await login(
+            email?.toString(),
+            pasdword?.toString(),
+        );
         if (loginResponse.error) {
-            setError(() => loginResponse.error!.message)
+            setError(() => loginResponse.error!.message);
         }
         setLoading(() => false);
-    }
+    };
     return (
         <div className="mx-auto w-full max-w-md rounded-none border border-solid border-white/30 bg-white p-4 shadow-input dark:bg-black md:rounded-2xl md:p-8">
             <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
@@ -63,21 +69,26 @@ export default function LoginPage() {
             </h2>
             <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
                 Login to stackoverflow
-                <br /> If you don&apos;t have an account,{" "}
-                <Link href="/signup" className="text-orange-500 hover:underline">
+                <br /> If you don&apos;t have an account,{' '}
+                <Link
+                    href="/signup"
+                    className="text-orange-500 hover:underline"
+                >
                     signup
-                </Link>{" "}
+                </Link>{' '}
                 with stackoverflow
             </p>
 
             {error && (
-                <p className="mt-8 text-center text-sm text-red-500 dark:text-red-400">{error}</p>
+                <p className="mt-8 text-center text-sm text-red-500 dark:text-red-400">
+                    {error}
+                </p>
             )}
             <form className="my-8" onSubmit={handleSubmit}>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
-                    className="text-black"
+                        className="text-white z-10"
                         id="email"
                         name="email"
                         placeholder="youremail@gmail.com"
@@ -86,7 +97,13 @@ export default function LoginPage() {
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input className="text-black" id="password" name="password" placeholder="••••••••" type="password" />
+                    <Input
+                        className="text-white z-10"
+                        id="password"
+                        name="password"
+                        placeholder="••••••••"
+                        type="password"
+                    />
                 </LabelInputContainer>
 
                 <button

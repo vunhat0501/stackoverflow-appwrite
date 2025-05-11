@@ -1,15 +1,17 @@
-"use client";
-import { useAuthStore } from "@/store/Auth";
-import { useRouter } from "next/navigation";
-import React from "react";
+'use client';
 
-const Layout = ({children} : {children: React.ReactNode}) => {
-    const {session} = useAuthStore();
+import { BackgroundBeams } from '@/components/ui/background-beam';
+import { useAuthStore } from '@/store/Auth';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
+    const { session } = useAuthStore();
     const router = useRouter();
 
     React.useEffect(() => {
         if (session) {
-            router.push("/");
+            router.push('/');
         }
     }, [session, router]);
 
@@ -18,10 +20,11 @@ const Layout = ({children} : {children: React.ReactNode}) => {
     }
 
     return (
-        <div className="">
+        <div className="relative flex min-h-screen flex-col items-center justify-center py-12">
+            <BackgroundBeams />
             <div className="">{children}</div>
         </div>
-    )
-}
+    );
+};
 
 export default Layout;
